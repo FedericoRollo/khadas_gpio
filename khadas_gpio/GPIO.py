@@ -1,3 +1,6 @@
+#  Copyright (c) 2023, Federico Rollo. All rights reserved.
+#  Licensed under the MIT license. See LICENSE file in the project root for details.
+
 import os
 
 class GPIO:
@@ -26,7 +29,7 @@ class GPIO:
                     print(f'\033[93mGPIO {str(self.gpio_pin)} in input direction: value not set.\033[0m')
         else:
             print(f'\033[93mGPIO {str(self.gpio_pin)} was already exported.\033[0m')
-        self.get_info()
+            self.get_info()
 
 
     def __del__(self):
@@ -38,7 +41,6 @@ class GPIO:
             print("\033[91mGPIO cannot be unexported:\n" + result + "\033[0m")
         else:
             print("GPIO pin " + str(self.gpio_pin) + " unexported.")
-
 
 
     def set_direction(self, set_input_direction: bool) -> bool:
@@ -69,6 +71,7 @@ class GPIO:
         print("GPIO value set: " + str(self.value))
         return True
 
+
     def get_direction(self) -> str:
 
         direction = os.popen('cat /sys/class/gpio/gpio' + str(self.gpio_pin) + '/direction').read()
@@ -79,6 +82,7 @@ class GPIO:
 
         value = os.popen('cat /sys/class/gpio/gpio' + str(self.gpio_pin) + '/value').read()
         return int(str.strip(value))
+
 
     def get_info(self) -> None:
         print(f'\033[92mGPIO: {self.gpio_pin}\ndirection: {self.get_direction()}\nvalue: {self.get_value()}\033[0m')
